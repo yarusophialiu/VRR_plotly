@@ -2,6 +2,9 @@ import dash
 from dash import html, dcc, callback, Input, Output
 from utils import *
 from analyze_plotly_velocity import *
+import plotly.express as px
+
+
 
 dash.register_page(__name__)
 scene_name = 'room'

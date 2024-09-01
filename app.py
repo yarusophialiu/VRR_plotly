@@ -2,8 +2,9 @@ import dash
 from dash import html
 from dash import dcc
 from utils import *
-import plotly.graph_objs as go
 from analyze_plotly_velocity import *
+import plotly.express as px
+
 
 ########### Define your variables
 beers=['Chesapeake Stout', 'Snake Dog IPA', 'Imperial Porter', 'Double Dog IPA']
