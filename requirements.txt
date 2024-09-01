@@ -11,7 +11,9 @@ Flask-Compress==1.10.1
 itsdangerous==2.0.1
 Jinja2==3.0.3
 MarkupSafe==2.0.1
-plotly==5.5.0
+# plotly==5.5.0
+plotly==5.23.0
+plotly_express==0.4.0
 six==1.16.0
 tenacity==8.0.1
 Werkzeug==2.0.2
