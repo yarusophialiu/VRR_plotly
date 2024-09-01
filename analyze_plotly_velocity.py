@@ -1,13 +1,7 @@
-import os
-import random
 import numpy as np
 import pandas as pd
 from datetime import datetime, date
 from utils import *
-import matplotlib.pyplot as plt
-import plotly.graph_objects as go
-import plotly.express as px
-
 
 
 def create_df_per_sequence(max_comb, velocities, COMBINE=False):
