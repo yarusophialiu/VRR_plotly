@@ -1,31 +1,15 @@
 import dash
-from dash import html
-from dash import dcc
+from dash import html, dcc, callback, Input, Output
 from utils import *
-import plotly.graph_objs as go
 from analyze_plotly_velocity import *
 
-########### Define your variables
-beers=['Chesapeake Stout', 'Snake Dog IPA', 'Imperial Porter', 'Double Dog IPA']
-ibu_values=[35, 60, 85, 75]
-abv_values=[5.4, 7.1, 9.2, 4.3]
-color1='darkred'
-color2='orange'
-mytitle='Beer Comparison'
-tabtitle='beer!'
-myheading='VRR Plotly'
-label1='IBU'
-label2='ABV'
-githublink='https://github.com/austinlasseter/flying-dog-beers'
-sourceurl='https://www.flyingdog.com/beers/'
-
-########### Set up the chart
+dash.register_page(__name__)
 
 scene_name = 'bistro'
 p_width = 800
 p_height = 700
 
-with open('velocity_sequence/bistro_velocity_cleaned.txt', 'r') as file:
+with open(f'velocity_sequence/{scene_name}_velocity_cleaned.txt', 'r') as file:
     lines = file.readlines()
 velocities = [float(line.strip()) for line in lines]
 # print(f'velocities {velocities}')
@@ -73,22 +57,32 @@ fig2000.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for
 
 
 
-########### Initiate the app
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets,use_pages=True)
-server = app.server
-app.title=tabtitle
+df = create_df_per_sequence(bistro_max_comb_per_sequence, velocities, COMBINE=True)
+# print(f'df \n {df}')
+fig_all_bitrates = px.scatter_3d(df, x='resolution', y='fps', z='velocity', color='bitrate') # scatter_3d line_3d
 
-app.layout = html.Div([
-    html.H1('VRR Plot results'),
-    html.Div([
-        html.Div(
-            dcc.Link(f"{page['name']} - {page['path']}", href=page["relative_path"])
-        ) for page in dash.page_registry.values()
-    ]),
-    dash.page_container
+fig_all_bitrates.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different bitrate, color indicates bitrate', 
+                                autosize=False,
+                                width=p_width+200, height=p_height+200,
+                                scene = scene_style, margin=dict(l=65, r=50, b=65, t=90))
+
+
+layout = html.Div([
+                html.H1(f'Complex scene {scene_name}'),
+                html.Div([
+                    html.Div([
+                        # html.H3('Column 1'),
+                        dcc.Graph(id=f'{scene_name}500', figure=fig500),
+                        dcc.Graph(id=f'{scene_name}1500', figure=fig1500)
+                    ], className="six columns"),
+
+                    html.Div([
+                        # html.H3('Column 2'),
+                        dcc.Graph(id=f'{scene_name}1000', figure=fig1000),
+                        dcc.Graph(id=f'{scene_name}2000', figure=fig2000),
+                    ], className="six columns"),
+                ], className="row"),
+                html.Div([dcc.Graph(id=f'{scene_name}allbitrates', figure=fig_all_bitrates),], className="row"),
 ])
 
-if __name__ == '__main__':
-    # app.run_server()
-    app.run(debug=True)
+
