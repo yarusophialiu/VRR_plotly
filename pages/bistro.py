@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, callback, Input, Output
+from dash import html, dcc
 from utils import *
 from analyze_plotly_velocity import *
 import plotly.express as px
