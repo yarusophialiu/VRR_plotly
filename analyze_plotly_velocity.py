@@ -67,7 +67,7 @@ def create_df_all_sequence(all_scenes, COMBINE=False):
             # Iterate through the dictionary and populate the lists
             for path, values in max_comb.items():
                 # print(f'values {values}')
-                count += 1
+                # count += 1
                 for idx, (fps, resolution) in enumerate(values):
                     fps_list.append(fps)
                     resolution_list.append(resolution)
