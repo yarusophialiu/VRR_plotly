@@ -33,44 +33,6 @@ velocities = [float(line.strip()) for line in lines]
 dfs_by_bitrate = create_df_per_sequence(bistro_max_comb_per_sequence, velocities)
 # bitrates = [500, 1000, 1500, 2000]
 # bitrates = [500, ]
-fig500 = px.scatter_3d(dfs_by_bitrate[500], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig500.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate 500kbps', 
-                    autosize=False,
-                    width=p_width, height=p_height,
-                    margin=dict(l=65, r=50, b=65, t=90),
-                    showlegend=False,
-                    scene = scene_style
-                )
-
-fig1000 = px.scatter_3d(dfs_by_bitrate[1000], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig1000.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate 1000kbps', 
-                    autosize=False,
-                    width=p_width, height=p_height,
-                    margin=dict(l=65, r=50, b=65, t=90),
-                    showlegend=False,
-                    scene = scene_style
-                )
-
-bitrate3 = 1500
-fig1500 = px.scatter_3d(dfs_by_bitrate[bitrate3], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig1500.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate {bitrate3}kbps', 
-                    autosize=False,
-                    width=p_width, height=p_height,
-                    margin=dict(l=65, r=50, b=65, t=90),
-                    showlegend=False,
-                    scene = scene_style,
-                )
-
-
-bitrate4 = 2000
-fig2000 = px.scatter_3d(dfs_by_bitrate[bitrate4], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig2000.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate {bitrate4}kbps', 
-                    autosize=False,
-                    width=p_width, height=p_height,
-                    margin=dict(l=65, r=50, b=65, t=90),
-                    showlegend=False,
-                    scene = scene_style,
-                )
 
 
 
