@@ -3,6 +3,7 @@ from dash import html, dcc
 from utils import *
 from analyze_plotly_velocity import *
 import plotly.express as px
+import plotly.io as pio
 
 
 dash.register_page(__name__)
@@ -15,16 +16,21 @@ dfs_by_bitrate = create_df_all_sequence(SCENES)
 print(f'dfs_by_bitrate \n {dfs_by_bitrate[500].shape}')
 
 fig500 = px.scatter_3d(dfs_by_bitrate[500], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig500.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate 500kbps', 
+fig500.update_layout(
+    title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate 500kbps', 
                     autosize=False,
                     width=p_width, height=p_height,
                     margin=dict(l=65, r=50, b=65, t=90),
+                    # margin=dict(l=65, r=50, b=100, t=0),
                     showlegend=False,
                     scene = scene_style
                 )
+# pio.write_image(fig500, "Downloads/scatter_plot_500.svg", format="svg")
+# fig500.write_image("images/fig500.svg")
 
 fig1000 = px.scatter_3d(dfs_by_bitrate[1000], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig1000.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate 1000kbps', 
+fig1000.update_layout(
+    title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate 1000kbps', 
                     autosize=False,
                     width=p_width, height=p_height,
                     margin=dict(l=65, r=50, b=65, t=90),
@@ -34,7 +40,8 @@ fig1000.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for
 
 bitrate3 = 1500
 fig1500 = px.scatter_3d(dfs_by_bitrate[bitrate3], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig1500.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate {bitrate3}kbps', 
+fig1500.update_layout(
+    title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate {bitrate3}kbps', 
                     autosize=False,
                     width=p_width, height=p_height,
                     margin=dict(l=65, r=50, b=65, t=90),
@@ -45,7 +52,8 @@ fig1500.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for
 
 bitrate4 = 2000
 fig2000 = px.scatter_3d(dfs_by_bitrate[bitrate4], x='resolution', y='fps', z='velocity', color='path') # scatter_3d line_3d
-fig2000.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate {bitrate4}kbps', 
+fig2000.update_layout(
+    title=f'scene {scene_name} \n optimal fps + resolution for different velocity, bitrate {bitrate4}kbps', 
                     autosize=False,
                     width=p_width, height=p_height,
                     margin=dict(l=65, r=50, b=65, t=90),
@@ -59,7 +67,8 @@ df = create_df_all_sequence(SCENES, COMBINE=True)
 # print(f'df \n {df}')
 fig_all_bitrates = px.scatter_3d(df, x='resolution', y='fps', z='velocity', color='bitrate') # scatter_3d line_3d
 
-fig_all_bitrates.update_layout(title=f'scene {scene_name} \n optimal fps + resolution for different bitrate, color indicates bitrate', 
+fig_all_bitrates.update_layout(
+    # title=f'scene {scene_name} \n optimal fps + resolution for different bitrate, color indicates bitrate', 
                                 autosize=False,
                                 width=p_width+200, height=p_height+200,
                                 scene = scene_style, margin=dict(l=65, r=50, b=65, t=90))
@@ -73,6 +82,11 @@ layout = html.Div([
                         dcc.Graph(id=f'{scene_name}500', figure=fig500),
                         dcc.Graph(id=f'{scene_name}1500', figure=fig1500)
                     ], className="six columns"),
+                    # html.Div([
+                    #     # html.H3('Column 1'),
+                    #     dcc.Graph(id=f'{scene_name}1500', figure=fig1500)
+                    # ], className="row"),
+
 
                     html.Div([
                         # html.H3('Column 2'),

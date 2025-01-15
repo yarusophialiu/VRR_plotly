@@ -52,6 +52,9 @@ app.layout = html.Div([
     dash.page_container
 ])
 
+
+# heroku login
+# heroku --app vrr-plotly logs -t
 if __name__ == '__main__':
     app.run_server()
     # app.run(debug=True)
