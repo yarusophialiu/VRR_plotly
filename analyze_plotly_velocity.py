@@ -72,7 +72,8 @@ def create_df_all_sequence(all_scenes, COMBINE=False):
                     fps_list.append(fps)
                     resolution_list.append(resolution)
                     bitrate_list.append((idx + 1) * 500)  # Assuming velocity is the index+1
-                    path_list.append(path)
+                    # path_list.append(f'{scene}_{path}')
+                    path_list.append(f'{scene}')
         else:
             print(f"Variable {variable_name} does not exist.\n")
 

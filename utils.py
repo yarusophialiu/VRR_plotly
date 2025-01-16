@@ -1,9 +1,7 @@
 import os
 import numpy as np
 from math import *
-
-
-
+import pandas as pd
 
 def frame_per_fps_video(fps):
     numOfFrames = 50
@@ -117,6 +115,18 @@ def type2_analysis(df, label_idx, bitrate, number, refresh_rate, max_jod, max_re
         max_jod.append(max(jod_cvvdp))
         max_res.append(x_values[max_jod_idx])
 
+
+def get_velocities_by_scene(scene, data):
+    df = pd.DataFrame(data)
+    bitrate_groups = df.groupby('bitrate')
+    dfs_by_bitrate = {bitrate: group_df for bitrate, group_df in bitrate_groups}
+    with open(f'reference_velocity/{scene}_cleaned.txt', 'r') as file:
+        lines = file.readlines()
+        velocities = [float(line.strip()) for line in lines]
+        velocities = np.array(velocities)
+        velocities /= 51
+        frame_limit = frame_per_fps_video(166)
+        velocities /= (frame_limit + 1)
 
 
 colors_matplotlib = [

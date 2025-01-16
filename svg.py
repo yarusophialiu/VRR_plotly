@@ -102,7 +102,7 @@ fig2000.update_layout(
                     scene_camera_eye=dict(x=1.8, y=1.8, z=1)
                 )
 
-fig500.write_image('images/fig500.svg')
+# fig500.write_image('images/fig500.svg')
 # fig1000.write_image('images/fig1000.svg')
 # fig1500.write_image('images/fig1500.svg')
 # fig2000.write_image('images/fig2000.svg')
