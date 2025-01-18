@@ -62,7 +62,6 @@ def create_df_all_sequence(all_scenes, COMBINE=False):
         # Use globals() to access the variable content
         if variable_name in globals():
             max_comb = globals()[variable_name]
-            print(f"Content of {variable_name}")
             # print(f"Content of {variable_name}: {variable_name['path1_seg1_1']}")
             # Iterate through the dictionary and populate the lists
             for path, values in max_comb.items():
