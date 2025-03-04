@@ -1,18 +1,22 @@
-import pandas as pd
-from utils import *
-from analyze_plotly_velocity import *
+import matplotlib.pyplot as plt
 
+# Original x-values and corresponding y-values
+x_values = [360, 480, 720, 864, 1080]
+y_values = [10, 20, 15, 25, 30]
 
-# SCENES = ['bedroom']
-# create_df_all_sequence(SCENES, COMBINE=False)
-import plotly.io as pio
-import plotly.express as px
+# Create evenly spaced values for plotting
+evenly_spaced_x = range(len(x_values))
 
+# Plot using the evenly spaced x-values
+plt.plot(evenly_spaced_x, y_values, marker='o')
 
+# Replace the x-ticks with the original values
+plt.xticks(evenly_spaced_x, x_values)
 
-scene_name = ': all scenes'
-p_width = 800
-p_height = 700
+# Add labels and title
+plt.xlabel("Resolution")
+plt.ylabel("Performance")
+plt.title("Evenly Spaced X-Axis")
 
-dfs_by_bitrate = create_df_all_sequence(SCENES)
-print(f'dfs_by_bitrate \n {dfs_by_bitrate[500]}')
+# Show the plot
+plt.show()
